@@ -1,13 +1,14 @@
 ---
+import { Image } from 'astro:assets';
 import Download from "../icons/Download.astro";
-import Logo from "/images/logo.png";
-import Borito from "/images/borito.jpg";
-import Sav from "/images/sav.png";
-import Csoori1 from "/images/csoori/1.png";
-import Csoori2 from "/images/csoori/2.png";
-import Studio1 from "/images/csoori/studio1.jpg";
-import Studio2 from "/images/csoori/studio2.jpg";
-import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
+import Logo from "../images/logo.png";
+import Borito from "../images/borito.jpg";
+import Sav from "../images/sav.png";
+import Csoori1 from "../images/csoori/1.png";
+import Csoori2 from "../images/csoori/2.png";
+import Studio1 from "../images/csoori/studio1.jpg";
+import Studio2 from "../images/csoori/studio2.jpg";
+import Szerzodes from "../Pántlika_Zenekar_szerződés.pdf";
 ---
 
 <!--
@@ -28,7 +29,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
   <body>
     <main>
       <!-- LOGO -->
-      <img class="logo" src={Logo} />
+      <Image alt="logo" class="logo" src={Logo} />
 
       <!--SOCIAL LINKS-->
       <ul class="social_links">
@@ -68,6 +69,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
           <a
             target="_blank"
             href="https://www.youtube.com/playlist?list=PLK2TbLF0FDt9YC-9f2SIh6tZa59ygKvMy"
+            href=""
             title="YouTube"
           >
             <i class="icon-youtube-squared"></i>
@@ -82,7 +84,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
             class="yt_iframe"
             width="560"
             height="315"
-            src="https://www.youtube.com/embed/Ij7V4Z3lQ9I"
+            src="https://www.youtube.com/embed/videoseries?list=PLK2TbLF0FDt9YC-9f2SIh6tZa59ygKvMy&index=1"
             style="border: 0px;"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>
@@ -101,7 +103,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
         <Download />
       </a>
 
-      <img class="sav" src={Sav} />
+      <Image alt="Sav" class="sav" src={Sav} />
 
       <!-- ABOUT -->
       <div class="about">
@@ -117,7 +119,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
         </p>
       </div>
 
-      <img class="sav" src={Sav} />
+      <Image alt="Sav" class="sav" src={Sav} />
 
       <!-- MEMBERS -->
       <div class="members">
@@ -133,16 +135,16 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
             <li>Szarvas Péter - tamburabőgő</li>
           </ul>
         </div>
-        <img class="members_pic" src={Borito} alt="" />
+        <Image class="members_pic" src={Borito} alt="" />
       </div>
 
-      <img class="sav" src={Sav} />
+      <Image alt="Sav" class="sav" src={Sav} />
 
       <!-- CSOORI -->
       <div class="csoori">
         <div class="csoori-logo-container">
-          <img class="csoori-logo" src={Csoori1} />
-          <img class="csoori-logo" src={Csoori2} />
+          <Image alt="Csoori1" class="csoori-logo" src={Csoori1} />
+          <Image alt="Csoori2" class="csoori-logo" src={Csoori2} />
         </div>
         <h2 class="csoori_title">Rólunk</h2>
         <p>
@@ -158,12 +160,12 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
         </ul>
 
         <div class="csoori-image-container">
-          <img class="csoori-image" src={Studio1} />
-          <img class="csoori-image" src={Studio2} />
+          <Image alt="Studio1" class="csoori-image" src={Studio1} />
+          <Image alt="Studio2" class="csoori-image" src={Studio2} />
         </div>
       </div>
 
-      <img class="sav" src={Sav} />
+      <Image alt="Sav" class="sav" src={Sav} />
     </main>
 
     <footer>
@@ -268,6 +270,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
     width: 22rem;
     margin: 3rem auto;
     max-width: 100%;
+    height: 100%;
   }
 
   .logo {
@@ -275,6 +278,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
     margin: 0.5rem auto;
     max-width: 100%;
     width: 30rem;
+    height: 100%;
   }
 
   .social_links {
@@ -375,6 +379,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
   .members_pic {
     max-width: 40rem;
     width: 100%;
+    height: 100%;
   }
 
   .csoori {
@@ -414,6 +419,7 @@ import Szerzodes from "/Pántlika_Zenekar_szerződés.pdf";
 
   .csoori-image {
     width: 29rem;
+    height: 100%;
   }
 
   .author {
