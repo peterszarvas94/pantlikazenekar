@@ -1,0 +1,51 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Public tool downloads must not authenticate to GitHub with Forgejo's token.
+# Checkout receives its Forgejo credential through the action's token input.
+env:
+  GITHUB_TOKEN: ''
+  GH_TOKEN: ''
+  MISE_GITHUB_TOKEN: ''
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: docker
+    timeout-minutes: 15
+    steps:
+      - uses: https://data.forgejo.org/actions/checkout@v7
+      - name: Set up project tools
+        uses: https://github.com/jdx/mise-action@v5
+        with:
+          version: 2026.10.8
+          cache: false
+          # Forgejo's Actions token cannot authenticate to GitHub.
+          github_token: ''
+      - name: Build
+        run: mise run --skip-tools build
+      - name: Install rsync
+        run: |
+          command -v rsync >/dev/null && command -v ssh >/dev/null || {
+            SUDO=$(command -v sudo || true)
+            $SUDO apt-get update -qq && $SUDO apt-get install -y -qq rsync openssh-client
+          }
+      - name: Deploy to shared
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          test -n "$DEPLOY_SSH_KEY" && test -n "$DEPLOY_KNOWN_HOSTS"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          # The key is restricted to rrsync into /var/www/pantlikazenekar.hu on the server.
+          rsync -az --delete -e "ssh -i ~/.ssh/deploy -o IdentitiesOnly=yes" dist/ peti@37.27.206.49:/
