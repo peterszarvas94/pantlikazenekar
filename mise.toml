@@ -6,6 +6,3 @@ run = "npm run dev"
 
 [tasks.build]
 run = "npm ci && npm run build"
-
-[tasks.deploy]
-run = "./deploy.sh"
