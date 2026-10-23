@@ -177,6 +177,12 @@ const members = [
             <Photo lang={lang} id="studio-2" src={Studio2} alt={en ? "Instruments at the recording studio" : "Stúdiófelvétel hangszerekkel"} widths={[640, 1024, 1599]} sizes="(max-width: 46rem) 100vw, 39rem" />
           </div>
         </section>
+        <Divider />
+
+        <section aria-labelledby="contact-title">
+          <h2 id="contact-title">{en ? "Contact" : "Kapcsolat"}</h2>
+          <SocialLinks lang={lang} labeled />
+        </section>
       </main>
 
       <footer>

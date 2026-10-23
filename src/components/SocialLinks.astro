@@ -1,8 +1,8 @@
 ---
 import Icon from "../icons/Icon.astro";
 
-interface Props { lang?: "hu" | "en"; }
-const { lang = "hu" } = Astro.props;
+interface Props { lang?: "hu" | "en"; labeled?: boolean; }
+const { lang = "hu", labeled = false } = Astro.props;
 const en = lang === "en";
 const englishLabels = [
   "Open Facebook page in a new window",
@@ -22,20 +22,29 @@ const links = [
 ---
 
 <nav aria-label={en ? "Social media and contact links" : "Közösségi média linkek"}>
-  <ul class="social_links">
+  <ul class={labeled ? "contact_links" : "social_links"} role="list">
     {
       links.map((link, i) => (
         <li>
           <a
             href={link.href}
             title={en && link.icon === "phone" ? "Phone" : link.title}
-            aria-label={en ? englishLabels[i] : link.label}
+            aria-label={labeled ? undefined : en ? englishLabels[i] : link.label}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
             <Icon name={link.icon} size={22} />
+            {labeled && <span>{link.icon === "mail" ? "pantlikazenekar@gmail.com" : link.icon === "phone" ? "+36 70 778 5049" : link.title}</span>}
           </a>
         </li>
       ))
     }
   </ul>
 </nav>
+
+<style>
+  .contact_links { display: flex; flex-direction: column; gap: 0.5rem; list-style: none; padding: 0; margin: 0 auto; width: fit-content; max-width: 100%; }
+  .contact_links a { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; color: var(--ink); text-underline-offset: 0.2em; }
+  .contact_links a:hover, .contact_links a:focus-visible { color: var(--red); }
+  .contact_links span { overflow-wrap: anywhere; min-width: 0; }
+  .contact_links :global(svg) { flex-shrink: 0; }
+</style>
