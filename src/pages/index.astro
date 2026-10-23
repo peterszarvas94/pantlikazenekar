@@ -12,6 +12,16 @@ import Csoori2 from "../images/csoori/2.png";
 import Studio1 from "../images/csoori/studio1.jpg";
 import Studio2 from "../images/csoori/studio2.jpg";
 import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
+
+// Listed right to left as they stand in the group photo.
+const members = [
+  { name: "Szabó Barnabás", role: "prímtambura" },
+  { name: "Szabó Péter Bence", role: "tamburabrácsa" },
+  { name: "Fehér Dániel", role: "basszprím tambura" },
+  { name: "Szabó Ádám", role: "basszprím tambura" },
+  { name: "Magdali Anna", role: "ének" },
+  { name: "Szarvas Péter", role: "tamburabőgő" },
+];
 ---
 
 <html lang="hu">
@@ -104,22 +114,25 @@ import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
         <section class="members" aria-labelledby="members-title">
           <h2 id="members-title">Tagok</h2>
           <a class="photo-link" href={Borito.src} target="_blank" rel="noopener" aria-label="Pántlika Zenekar tagjai csoportképen (nagyobb méretben, új ablakban)">
-            <Image class="photo" src={Borito} alt="Pántlika Zenekar tagjai csoportképen" widths={[640, 1024, 1600]} sizes="(max-width: 40rem) 100vw, 33rem" />
+            <Image class="photo" src={Borito} alt="Pántlika Zenekar tagjai csoportképen" widths={[640, 1024, 1600]} sizes="(max-width: 46rem) 100vw, 39rem" />
           </a>
           <div class="members_body">
             <p class="members_note">
-            <Icon name="arrow-left" size={16} />
-            <span>Jobbról balra</span>
-            <Icon name="arrow-left" size={16} />
-          </p>
-            <ul class="members_list" role="list">
-              <li><strong>Szabó Barnabás</strong><span>prímtambura</span></li>
-              <li><strong>Szabó Péter Bence</strong><span>tamburabrácsa</span></li>
-              <li><strong>Fehér Dániel</strong><span>basszprím tambura</span></li>
-              <li><strong>Szabó Ádám</strong><span>basszprím tambura</span></li>
-              <li><strong>Magdali Anna</strong><span>ének</span></li>
-              <li><strong>Szarvas Péter</strong><span>tamburabőgő</span></li>
-            </ul>
+              <Icon name="arrow-left" size={16} />
+              <span>Jobbról balra</span>
+              <Icon name="arrow-left" size={16} />
+            </p>
+            <ol class="members_list">
+              {
+                members.map((m, i) => (
+                  <li>
+                    <span class="member_num" aria-hidden="true">{i + 1}</span>
+                    <strong>{m.name}</strong>
+                    <span class="member_role">{m.role}</span>
+                  </li>
+                ))
+              }
+            </ol>
           </div>
         </section>
 
@@ -145,10 +158,10 @@ import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
 
           <div class="gallery">
             <a class="photo-link" href={Studio1.src} target="_blank" rel="noopener" aria-label="Stúdiófelvétel közben a zenekar (nagyobb méretben, új ablakban)">
-              <Image class="photo" alt="Stúdiófelvétel közben a zenekar" src={Studio1} widths={[640, 1024, 1599]} sizes="(max-width: 40rem) 100vw, 33rem" />
+              <Image class="photo" alt="Stúdiófelvétel közben a zenekar" src={Studio1} widths={[640, 1024, 1599]} sizes="(max-width: 46rem) 100vw, 39rem" />
             </a>
             <a class="photo-link" href={Studio2.src} target="_blank" rel="noopener" aria-label="Stúdiófelvétel hangszerekkel (nagyobb méretben, új ablakban)">
-              <Image class="photo" alt="Stúdiófelvétel hangszerekkel" src={Studio2} widths={[640, 1024, 1599]} sizes="(max-width: 40rem) 100vw, 33rem" />
+              <Image class="photo" alt="Stúdiófelvétel hangszerekkel" src={Studio2} widths={[640, 1024, 1599]} sizes="(max-width: 46rem) 100vw, 39rem" />
             </a>
           </div>
         </section>
@@ -235,7 +248,7 @@ import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
 
   .card {
     --card-pad: clamp(1.25rem, 5vw, 3.5rem);
-    max-width: 56rem;
+    max-width: 46rem;
     margin: 0 auto;
     background: var(--card);
     -webkit-backdrop-filter: blur(16px) saturate(1.2);
@@ -305,13 +318,11 @@ import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
     box-shadow: 0 8px 18px -6px rgb(182 3 2 / 0.5);
   }
 
-  /* Media shares the text column width */
+  /* Media uses the full card width; text stays in the narrower --measure column */
   .video,
   .members .photo-link,
   .gallery {
     width: 100%;
-    max-width: var(--measure);
-    margin-inline: auto;
   }
 
   /* VIDEO */
@@ -402,22 +413,24 @@ import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
   }
 
   .members_list {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 0.6rem;
-    width: 100%;
-    max-width: 14rem;
-    margin: 0 auto;
+    margin: 0;
     padding: 0;
     list-style: none;
   }
 
   .members_list li {
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 0.75rem 0.5rem;
+    gap: 0.15rem;
+    flex: 1 1 11rem;
+    padding: 0.75rem 2.4rem 0.75rem 0.8rem;
     line-height: 1.3;
-    text-align: center;
+    text-align: left;
     background: rgb(255 255 255 / 0.6);
     border: 1px solid rgb(255 255 255 / 0.8);
     border-radius: 14px;
@@ -429,7 +442,7 @@ import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
     font-weight: 700;
   }
 
-  .members_list span {
+  .member_role {
     font-size: var(--fs-sm);
     color: var(--ink-soft);
   }
@@ -437,19 +450,41 @@ import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
   .photo-link {
     display: block;
     border-radius: var(--radius);
+    transition: transform 0.2s;
+  }
+
+  .photo-link:hover,
+  .photo-link:focus-visible {
+    transform: translateY(-2px);
   }
 
   .photo {
     width: 100%;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: box-shadow 0.2s;
   }
 
   .photo-link:hover .photo,
   .photo-link:focus-visible .photo {
-    transform: translateY(-2px);
     box-shadow: 0 1px 2px rgb(90 26 26 / 0.08), 0 20px 44px -14px rgb(90 26 26 / 0.4);
+  }
+
+  /* Position number on each member card */
+  .member_num {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: grid;
+    place-items: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 999px;
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink-soft);
+    background: rgb(59 20 20 / 0.08);
   }
 
   /* CSOÓRI */
