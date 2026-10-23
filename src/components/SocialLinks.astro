@@ -32,7 +32,7 @@ const links = [
             aria-label={labeled ? undefined : en ? englishLabels[links.indexOf(link)] : link.label}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
-            <Icon name={link.icon} size={22} />
+            <Icon name={link.icon} size={labeled ? (link.external ? 18 : 28) : 22} />
             {labeled && <span>{!link.external && <small>{link.icon === "mail" ? "Email" : en ? "Phone" : "Telefon"}</small>}{link.icon === "mail" ? "pantlikazenekar@gmail.com" : link.icon === "phone" ? "+36 70 778 5049" : link.title}</span>}
           </a>
         </li>
@@ -47,7 +47,8 @@ const links = [
   .contact_links .direct a {
     box-sizing: border-box;
     width: min(100%, 26rem);
-    padding: 1rem 1.25rem;
+    padding: 1.125rem 1.25rem;
+    gap: 1rem;
     border: 1px solid rgb(59 20 20 / 0.1);
     border-radius: 14px;
     background: rgb(255 255 255 / 0.65);
@@ -60,10 +61,11 @@ const links = [
     border-color: rgb(182 3 2 / 0.25);
     box-shadow: 0 5px 16px -7px rgb(90 26 26 / 0.25);
   }
-  .contact_links .direct span { text-decoration: none; }
-  .contact_links small { display: block; margin-bottom: 0.2rem; font-size: 0.8rem; color: var(--ink-soft); }
+  .contact_links .direct span { display: flex; flex-direction: column; gap: 0.3rem; line-height: 1.35; text-decoration: none; }
+  .contact_links small { display: block; margin: 0; line-height: 1.2; font-size: 0.8rem; color: var(--ink-soft); }
   .contact_links .direct:first-child { margin-bottom: 0.5rem; }
   .contact_links .direct:nth-child(2) { margin-bottom: 1rem; }
+  .contact_links li:not(.direct) a { gap: 0.4rem; }
   .contact_links li:not(.direct) { font-size: 0.9rem; color: var(--ink-soft); }
   .contact_links a { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; color: inherit; text-decoration: none; }
   .contact_links a:hover, .contact_links a:focus-visible { color: var(--red); }
