@@ -262,6 +262,7 @@ const members = [
 
   a {
     color: inherit;
+    text-decoration: none;
   }
 
   .card {
@@ -320,19 +321,20 @@ const members = [
     padding: 0 0.5rem;
     color: var(--ink-soft);
     text-decoration: none;
-    text-underline-offset: 0.3em;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
   }
 
   .languages a[aria-current="page"] {
     color: var(--ink);
     font-weight: 700;
-    text-decoration: underline;
+    border-bottom-color: rgb(59 20 20 / 0.25);
   }
 
   .languages a:hover,
   .languages a:focus-visible {
     color: var(--red);
-    text-decoration: underline;
+    border-bottom-color: rgb(59 20 20 / 0.25);
   }
 
   .social_links {
@@ -671,12 +673,13 @@ const members = [
   }
 
   footer a {
-    text-decoration-color: rgb(59 20 20 / 0.3);
-    text-underline-offset: 3px;
-    transition: color 0.15s;
+    border-bottom: 1px solid rgb(59 20 20 / 0.18);
+    padding-bottom: 2px;
+    transition: color 0.15s, border-color 0.15s;
   }
 
   footer a:hover {
+    border-bottom-color: rgb(182 3 2 / 0.45);
     color: var(--red);
   }
 
