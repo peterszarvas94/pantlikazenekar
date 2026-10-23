@@ -24,12 +24,12 @@ const links = [
 <nav aria-label={en ? "Social media and contact links" : "Közösségi média linkek"}>
   <ul class={labeled ? "contact_links" : "social_links"} role="list">
     {
-      links.map((link, i) => (
-        <li>
+      (labeled ? [...links.filter(link => !link.external), ...links.filter(link => link.external)] : links).map((link) => (
+        <li class:list={{ direct: labeled && !link.external }}>
           <a
             href={link.href}
             title={en && link.icon === "phone" ? "Phone" : link.title}
-            aria-label={labeled ? undefined : en ? englishLabels[i] : link.label}
+            aria-label={labeled ? undefined : en ? englishLabels[links.indexOf(link)] : link.label}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
             <Icon name={link.icon} size={22} />
@@ -42,8 +42,12 @@ const links = [
 </nav>
 
 <style>
-  .contact_links { display: flex; flex-direction: column; gap: 0.5rem; list-style: none; padding: 0; margin: 0 auto; width: fit-content; max-width: 100%; }
-  .contact_links a { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; color: var(--ink); text-underline-offset: 0.2em; }
+  .contact_links { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 1.25rem; row-gap: 0.25rem; list-style: none; padding: 0; margin: 0 auto; max-width: 100%; }
+  .contact_links .direct { display: flex; justify-content: center; width: 100%; }
+  .contact_links .direct a { font-size: 1.15rem; }
+  .contact_links .direct:nth-child(2) { margin-bottom: 1rem; }
+  .contact_links li:not(.direct) { font-size: 0.9rem; color: var(--ink-soft); }
+  .contact_links a { display: flex; align-items: center; gap: 0.75rem; min-height: 2.75rem; color: inherit; text-underline-offset: 0.2em; }
   .contact_links a:hover, .contact_links a:focus-visible { color: var(--red); }
   .contact_links span { overflow-wrap: anywhere; min-width: 0; }
   .contact_links :global(svg) { flex-shrink: 0; }

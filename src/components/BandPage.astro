@@ -179,7 +179,7 @@ const members = [
         </section>
         <Divider />
 
-        <section aria-labelledby="contact-title">
+        <section class="contact" aria-labelledby="contact-title">
           <h2 id="contact-title">{en ? "Contact" : "Kapcsolat"}</h2>
           <SocialLinks lang={lang} labeled />
         </section>
@@ -647,6 +647,10 @@ const members = [
   .gallery .photo {
     aspect-ratio: 4 / 3;
     object-fit: cover;
+  }
+
+  .contact h2 {
+    margin-bottom: 1.5rem;
   }
 
   /* FOOTER */
