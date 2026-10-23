@@ -1,6 +1,17 @@
 ---
 import Icon from "../icons/Icon.astro";
 
+interface Props { lang?: "hu" | "en"; }
+const { lang = "hu" } = Astro.props;
+const en = lang === "en";
+const englishLabels = [
+  "Open Facebook page in a new window",
+  "Open Instagram profile in a new window",
+  "Open YouTube playlist in a new window",
+  "Email the band",
+  "Call the band",
+];
+
 const links = [
   { icon: "facebook", href: "https://www.facebook.com/pantlikazenekar/", title: "Facebook", label: "Facebook oldal megnyitása új ablakban", external: true },
   { icon: "instagram", href: "https://www.instagram.com/pantlikatamburazenekar/", title: "Instagram", label: "Instagram profil megnyitása új ablakban", external: true },
@@ -10,15 +21,15 @@ const links = [
 ] as const;
 ---
 
-<nav aria-label="Közösségi média linkek">
+<nav aria-label={en ? "Social media and contact links" : "Közösségi média linkek"}>
   <ul class="social_links">
     {
-      links.map((link) => (
+      links.map((link, i) => (
         <li>
           <a
             href={link.href}
-            title={link.title}
-            aria-label={link.label}
+            title={en && link.icon === "phone" ? "Phone" : link.title}
+            aria-label={en ? englishLabels[i] : link.label}
             {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
             <Icon name={link.icon} size={22} />

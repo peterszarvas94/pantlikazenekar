@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import Icon from "../icons/Icon.astro";
 
 interface Props {
+  lang?: "hu" | "en";
   id: string;
   src: ImageMetadata;
   alt: string;
@@ -11,16 +12,16 @@ interface Props {
   sizes: string;
 }
 
-const { id, src, alt, widths, sizes } = Astro.props;
+const { id, src, alt, widths, sizes, lang = "hu" } = Astro.props;
 const popoverId = `photo-${id}`;
 ---
 
-<button class="photo-link" type="button" popovertarget={popoverId} aria-label={`${alt} (nagyobb méretben)`}>
+<button class="photo-link" type="button" popovertarget={popoverId} aria-label={`${alt} (${lang === "en" ? "view larger" : "nagyobb méretben"})`}>
   <Image class="photo" src={src} alt={alt} widths={widths} sizes={sizes} />
 </button>
 <div id={popoverId} class="lightbox" popover>
   <img class="lightbox_img" src={src.src} alt={alt} width={src.width} height={src.height} loading="lazy" decoding="async" />
-  <button class="lightbox_close" type="button" popovertarget={popoverId} popovertargetaction="hide" aria-label="Bezárás">
+  <button class="lightbox_close" type="button" popovertarget={popoverId} popovertargetaction="hide" aria-label={lang === "en" ? "Close" : "Bezárás"}>
     <Icon name="x" size={22} />
   </button>
 </div>
