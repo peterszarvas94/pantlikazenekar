@@ -1,0 +1,683 @@
+---
+import { Image } from 'astro:assets';
+import "@fontsource-variable/source-sans-3";
+import "@fontsource-variable/fraunces";
+import Icon from "../icons/Icon.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import Divider from "../components/Divider.astro";
+import Photo from "../components/Photo.astro";
+import Logo from "../images/logo.png";
+import Borito from "../images/borito.jpg";
+import Csoori1 from "../images/csoori/1.png";
+import Csoori2 from "../images/csoori/2.png";
+import Studio1 from "../images/csoori/studio1.jpg";
+import Studio2 from "../images/csoori/studio2.jpg";
+import Szerzodes from "/assets/Pántlika_Zenekar_szerződés.pdf";
+
+interface Props { lang: "hu" | "en"; }
+const { lang } = Astro.props;
+const en = lang === "en";
+const title = en ? "Pántlika Tambura Band" : "Pántlika Zenekar";
+const description = en
+  ? "Traditional Hungarian folk music from Báta and the Sárköz region. Meet the Pántlika Tambura Band, discover our music and get in touch."
+  : "Pántlika Tambura Zenekar - Bátai hagyományőrző zenekar. Sárközi népzene, tambura hagyomány, koncertek és műsorok.";
+const canonical = `https://pantlikazenekar.hu${en ? "/en/" : "/"}`;
+
+// Listed right to left as they stand in the group photo.
+const members = [
+  { name: "Szabó Barnabás", role: en ? "prim tambura" : "prímtambura" },
+  { name: "Szabó Péter Bence", role: en ? "tambura viola (kontra)" : "tamburabrácsa" },
+  { name: "Fehér Dániel", role: en ? "basprim tambura" : "basszprím tambura" },
+  { name: "Szabó Ádám", role: en ? "basprim tambura" : "basszprím tambura" },
+  { name: "Magdali Anna", role: en ? "vocals" : "ének" },
+  { name: "Szarvas Péter", role: en ? "tambura contrabass" : "tamburabőgő" },
+];
+---
+
+<html lang={lang}>
+  <!--
+  Author name: Szarvas Péter
+  Author email: contact@peterszarvas.com
+  Release date: 2019. 04. 25.
+  Repo: https://github.com/peterszarvas94/pantlikazenekar
+  Author site: https://peterszarvas.hu  
+  Ajándék a híres bátai Pántlika Zenekarnak. :)
+  -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <meta name="description" content={description} />
+
+    <meta name="author" content="Szarvas Péter" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#f6d9de" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://pantlikazenekar.hu/og.jpg" />
+    <meta property="og:locale" content={en ? "en_GB" : "hu_HU"} />
+    <meta property="og:locale:alternate" content={en ? "hu_HU" : "en_GB"} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="hu" href="https://pantlikazenekar.hu/" />
+    <link rel="alternate" hreflang="en" href="https://pantlikazenekar.hu/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://pantlikazenekar.hu/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <div class="card">
+      <header class="site-header">
+        <Image alt={en ? "Pántlika Band logo" : "Pántlika Zenekar logó"} class="logo" src={Logo} loading="eager" />
+        <SocialLinks lang={lang} />
+        <nav class="languages" aria-label={en ? "Language" : "Nyelv"}>
+          <a href="/" lang="hu" hreflang="hu" aria-current={!en ? "page" : undefined}>Magyar</a>
+          <span aria-hidden="true">/</span>
+          <a href="/en/" lang="en" hreflang="en" aria-current={en ? "page" : undefined}>English</a>
+        </nav>
+      </header>
+      <main>
+
+        <section aria-label={en ? "Videos" : "Videók"}>
+          <div class="video">
+            <iframe
+              src="https://www.youtube.com/embed/videoseries?list=PLK2TbLF0FDt9YC-9f2SIh6tZa59ygKvMy&index=1"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              title={en ? "Pántlika Band YouTube playlist" : "Pántlika Zenekar YouTube lejátszási lista"}></iframe>
+          </div>
+        </section>
+
+        <a
+          class="contract"
+          href={Szerzodes}
+          download="Pántlika_Zenekar_szerződés.pdf"
+          aria-label={en ? "Download performance contract PDF (Hungarian)" : "Műsorszerződés PDF letöltése"}
+        >
+          <Icon name="file-down" size={20} />
+          <span>{en ? "Performance contract (HU)" : "Műsorszerződés letöltése"}</span>
+        </a>
+
+        <Divider />
+
+        <section class="prose" aria-labelledby="about-title">
+          <h2 id="about-title">{en ? "About us" : "Rólunk"}</h2>
+          <p>
+            {en ? "Our band was founded in 2010 by young musicians from Báta. Bence and Barnabás are the two remaining founding members. The current line-up has been playing together since 2018." : `Zenekarunk 2010-ben alakult meg Bátán helyi fiatalokból. Az alapítók
+            közül már csak Bence és Barnabás maradt. A jelenlegi felállás 2018 óta
+            zenél együtt.`}
+          </p>
+          <p>
+            {en ? "Most of us come from Báta, a village in the Sárköz region known for keeping its folk traditions alive. Preserving the village’s musical heritage, especially its tambura traditions, is close to our hearts." : `Nagyrészt Bátáról származunk, a Sárköz egyik kiemelkedő
+            hagyományőrző falujából. Ezáltal fontosnak tartjuk, hogy e falu zenei
+            hagyományait, a tamburahagyományt ápoljuk.`}
+          </p>
+          <p>
+            {en ? "Our repertoire centres on folk music from the outer and inner Sárköz regions. We also enjoy playing melodies from Kalocsa, Szatmár, Őrkő, the Galga valley and beyond." : `Repertoárunk gerincét a
+            külső- és belső-sárközi népzene alkotja, de szívesen játszunk
+            kalocsai, szatmári, őrkői, galgamenti és más dallamokat is.`}
+          </p>
+        </section>
+
+        <Divider />
+
+        <section class="members" aria-labelledby="members-title">
+          <h2 id="members-title">{en ? "Members" : "Tagok"}</h2>
+          <Photo lang={lang} id="tagok" src={Borito} alt={en ? "The members of Pántlika Band" : "Pántlika Zenekar tagjai csoportképen"} widths={[640, 1024, 1600]} sizes="(max-width: 46rem) 100vw, 39rem" />
+          <div class="members_body">
+            <p class="members_note">
+              <Icon name="arrow-left" size={16} />
+              <span>{en ? "From right to left" : "Jobbról balra"}</span>
+              <Icon name="arrow-left" size={16} />
+            </p>
+            <ol class="members_list">
+              {
+                members.map((m, i) => (
+                  <li>
+                    <span class="member_num" aria-hidden="true">{i + 1}</span>
+                    <strong>{m.name}</strong>
+                    <span class="member_role">{m.role}</span>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </section>
+
+        <Divider />
+
+        <section class="prose" aria-labelledby="csoori-title">
+          <div class="csoori-logos">
+            <Image alt={en ? "Csoóri Sándor Programme logo" : "Csoóri Sándor Program logó"} src={Csoori1} />
+            <Image alt={en ? "Ministry of Human Capacities logo" : "Emberi Erőforrások Minisztériuma logó"} src={Csoori2} />
+          </div>
+          <h2 id="csoori-title">{en ? "Csoóri Sándor Programme" : "Csoóri Sándor Program"}</h2>
+          <p>
+            {en ? "In 2020, Hungary’s Ministry of Human Capacities supported our band through the Csoóri Sándor Programme. The funding helped us with:" : `2020-ban az Emberi Erőforrások Minisztériuma a Csoóri Sándor Program
+            keretein belül támogatta a zenekarunk működését. A támogatást a
+            következőkre fordítottuk:`}
+          </p>
+          <ul>
+            <li>{en ? "studio recording" : "stúdiófelvétel"}</li>
+            <li>{en ? "CD cover design" : "CD borító elkészítése"}</li>
+            <li>{en ? "purchasing equipment (microphones)" : "technikai eszközök beszerzése (mikrofonok)"}</li>
+            <li>{en ? "working with a professional mentor" : "együttműködés szakmai mentorral"}</li>
+          </ul>
+
+          <div class="gallery">
+            <Photo lang={lang} id="studio-1" src={Studio1} alt={en ? "The band during a studio recording session" : "Stúdiófelvétel közben a zenekar"} widths={[640, 1024, 1599]} sizes="(max-width: 46rem) 100vw, 39rem" />
+            <Photo lang={lang} id="studio-2" src={Studio2} alt={en ? "Instruments at the recording studio" : "Stúdiófelvétel hangszerekkel"} widths={[640, 1024, 1599]} sizes="(max-width: 46rem) 100vw, 39rem" />
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>© <span id="copyright-years">2026</span> Pántlika Tambura Zenei Egyesület</p>
+        <p>{en ? "All rights reserved." : "Minden jog fenntartva."}</p>
+        <p class="footer_credit">{en ? "Website by:" : "Készítette:"}</p>
+        <p><a href="https://peterszarvas.hu" target="_blank" rel="noopener noreferrer">peterszarvas.hu</a></p>
+      </footer>
+      <script is:inline>
+        (() => {
+          const year = new Date().getFullYear();
+          if (year > 2026) document.getElementById("copyright-years").textContent = `2026–${year}`;
+        })();
+      </script>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --fs-sm: 0.9rem;
+    --fs-md: 1.125rem;
+    --fs-lg: clamp(1.75rem, 4vw, 2.25rem);
+    --measure: 50ch;
+    --ink: #3b1414;
+    --ink-soft: #7a5555;
+    --red: #b60302;
+    --red-dark: #8f0201;
+    --blue: #2f8cf0;
+    --card: rgb(255 255 255 / 0.72);
+    --radius: 18px;
+    --shadow: 0 1px 2px rgb(90 26 26 / 0.06), 0 14px 36px -14px rgb(90 26 26 / 0.3);
+    --font-body: "Source Sans 3 Variable", system-ui, sans-serif;
+    --font-heading: "Fraunces Variable", Georgia, serif;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    margin: 0;
+    padding: clamp(0.75rem, 3vw, 2.5rem) clamp(0.5rem, 2vw, 1.5rem);
+    font-family: var(--font-body);
+    font-size: var(--fs-md);
+    line-height: 1.65;
+    color: var(--ink);
+    background: #f6d9de;
+  }
+
+  /* Fixed texture layer sized to the large viewport, so it still covers the
+     screen after the mobile URL bar collapses (background-attachment: fixed doesn't). */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
+    z-index: -1;
+    background: url("../images/background.png") repeat;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .card {
+    --card-pad: clamp(1.25rem, 5vw, 3.5rem);
+    max-width: 46rem;
+    margin: 0 auto;
+    background: var(--card);
+    -webkit-backdrop-filter: blur(16px) saturate(1.2);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border: 1px solid rgb(255 255 255 / 0.7);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+  }
+
+  main {
+    padding: var(--card-pad);
+  }
+
+  h2 {
+    margin: 0 0 2.5rem;
+    text-align: center;
+    font-family: var(--font-heading);
+    font-size: var(--fs-lg);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  /* HEADER */
+  .site-header {
+    display: grid;
+    justify-items: center;
+    gap: 1.25rem;
+    padding: var(--card-pad);
+    border-bottom: 2px dotted rgb(59 20 20 / 0.25);
+  }
+
+  .logo {
+    width: min(26rem, 100%);
+    margin: 0 auto;
+  }
+
+  .languages {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--ink-soft);
+    font-size: var(--fs-sm);
+  }
+
+  .languages a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 0.5rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    text-underline-offset: 0.3em;
+  }
+
+  .languages a[aria-current="page"] {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  .languages a:hover,
+  .languages a:focus-visible {
+    color: var(--red);
+    text-decoration: underline;
+  }
+
+  .social_links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .social_links a {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    color: var(--ink);
+    background: rgb(255 255 255 / 0.7);
+    border: 1px solid rgb(59 20 20 / 0.1);
+    box-shadow: 0 2px 6px -2px rgb(90 26 26 / 0.15);
+    transition: color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+
+  .social_links a:hover,
+  .social_links a:focus-visible {
+    color: #fff;
+    background: var(--red);
+    border-color: var(--red);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px -6px rgb(182 3 2 / 0.5);
+  }
+
+  /* Media uses the full card width; text stays in the narrower --measure column */
+  .video,
+  .members .photo-link,
+  .gallery {
+    width: 100%;
+  }
+
+  /* VIDEO */
+  .video {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    background: #000;
+  }
+
+  .video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  /* CONTRACT BUTTON */
+  .contract {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+    margin: 2rem auto 0;
+    padding: 0.8rem 1.5rem;
+    font-weight: 700;
+    font-size: var(--fs-md);
+    color: #fff;
+    text-decoration: none;
+    background: var(--red);
+    border-radius: 999px;
+    box-shadow: 0 8px 22px -8px rgb(182 3 2 / 0.6);
+    transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+
+  .contract:hover,
+  .contract:focus-visible {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px -8px rgb(182 3 2 / 0.65);
+  }
+
+  /* DIVIDER */
+  .sav {
+    width: min(13rem, 70%);
+    margin: 3rem auto;
+    opacity: 0.9;
+  }
+
+  /* TEXT */
+  .prose p {
+    margin: 0 auto 1rem;
+    max-width: var(--measure);
+  }
+
+  .prose ul {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding-left: 1.25rem;
+  }
+
+  .prose li::marker {
+    color: var(--red);
+  }
+
+  /* MEMBERS */
+  .members {
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .members h2 {
+    margin: 0;
+  }
+
+  .members_note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+
+  .members_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .members_list li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.75rem 2.4rem 0.75rem 0.8rem;
+    line-height: 1.3;
+    text-align: left;
+    background: rgb(255 255 255 / 0.6);
+    border: 1px solid rgb(255 255 255 / 0.8);
+    border-radius: 14px;
+    box-shadow: 0 4px 14px -8px rgb(90 26 26 / 0.25);
+  }
+
+  .members_list strong {
+    font-size: var(--fs-md);
+    font-weight: 700;
+  }
+
+  .member_role {
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+  }
+
+  .photo-link {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: zoom-in;
+    border-radius: var(--radius);
+    transition: transform 0.2s;
+  }
+
+  .photo-link:hover,
+  .photo-link:focus-visible {
+    transform: translateY(-2px);
+  }
+
+  .photo {
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+  }
+
+  .photo-link:hover .photo,
+  .photo-link:focus-visible .photo {
+    box-shadow: 0 1px 2px rgb(90 26 26 / 0.08), 0 20px 44px -14px rgb(90 26 26 / 0.4);
+  }
+
+  /* Position number on each member card */
+  .member_num {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: grid;
+    place-items: center;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 999px;
+    font-size: var(--fs-sm);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--ink-soft);
+    background: rgb(59 20 20 / 0.08);
+  }
+
+  /* LIGHTBOX */
+  .lightbox {
+    width: fit-content;
+    max-width: 92vw;
+    max-height: 92dvh;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    overflow: visible;
+  }
+
+  .lightbox::backdrop {
+    background: rgb(20 8 8 / 0.75);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+
+  .lightbox_img {
+    max-width: 92vw;
+    max-height: 92dvh;
+    width: auto;
+    height: auto;
+    border-radius: var(--radius);
+    box-shadow: 0 20px 60px -20px rgb(0 0 0 / 0.6);
+  }
+
+  .lightbox_close {
+    position: fixed;
+    top: max(1rem, env(safe-area-inset-top));
+    right: max(1rem, env(safe-area-inset-right));
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    color: var(--ink);
+    background: rgb(255 255 255 / 0.85);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 14px -4px rgb(0 0 0 / 0.4);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .lightbox_close:hover,
+  .lightbox_close:focus-visible {
+    color: #fff;
+    background: var(--red);
+  }
+
+  @media (max-width: 40rem) {
+    .lightbox {
+      width: 100vw;
+      height: 100dvh;
+      max-width: none;
+      max-height: none;
+      margin: 0;
+      inset: 0;
+      border-radius: 0;
+      background: #000;
+    }
+
+    .lightbox:popover-open {
+      display: grid;
+      place-items: center;
+    }
+
+    .lightbox_img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+
+  /* CSOÓRI */
+  .csoori-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .csoori-logos img {
+    height: 6rem;
+    width: auto;
+    padding: 0.5rem;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px -10px rgb(90 26 26 / 0.35);
+  }
+
+  .gallery {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .gallery .photo {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 1.75rem var(--card-pad);
+    border-top: 2px dotted rgb(59 20 20 / 0.25);
+    text-align: center;
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+  }
+
+  footer p {
+    margin: 0.2rem 0;
+  }
+
+  footer .footer_credit {
+    margin-top: 1.25rem;
+  }
+
+  footer a {
+    text-decoration-color: rgb(59 20 20 / 0.3);
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+
+  footer a:hover {
+    color: var(--red);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+    }
+  }
+</style>
