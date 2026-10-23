@@ -4,4 +4,7 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
 	site: "https://pantlikazenekar.hu",
 	output: "static",
+	devToolbar: {
+		enabled: false,
+	},
 });
